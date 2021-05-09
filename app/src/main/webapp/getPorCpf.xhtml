@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+    <title>Pessoa por cpf</title>
+</head>
+<body>
+<h:form>
+
+            <div>
+                <input name="query" type="text" required="true"
+                       jsf:id="query" jsf:value="${pessoaController.busca}" />
+                <label for="query">Digite para Buscar</label>
+            </div>
+            <div >
+                <h:selectOneMenu id="tipoBusca" value="${pessoaController.tipoBusca}">
+                    <f:selectItem itemValue="Gerente" itemLabel="CPF gerente" />
+                    <f:selectItem itemValue="Integrante" itemLabel="CPF integrante" />
+                </h:selectOneMenu>
+                <label for="tipoBusca">Buscar por:</label>
+            </div>
+                <button
+                        jsf:action="${pessoaController.buscar()}">
+                    Buscar
+                </button>
+            </h:form>
+            <h:form>
+                <h:dataTable value="${pessoaController.pessoas}" var="pessoa">
+                    <h:column>
+                        <f:facet name="header">Nome:</f:facet>
+                        ${pessoa.nome}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">CPF:</f:facet>
+                        ${pessoa.cpf.formatado()}
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+
+
+</body>
+</html>
